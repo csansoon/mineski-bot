@@ -6,32 +6,26 @@ module.exports = {
     icon: ':speech_balloon:',
     description: 'Crea un nuevo embed',
     needs_args: true,
-    min_args: 2,
-    usage: '<título> <"descripción">',
+    min_args: 1,
+    usage: '<título>',
     admin: false,
     guildOnly: true,
-	execute(message, args) {
-        const newEmbed = new Discord.MessageEmbed()
-        newEmbed.setColor('#0099ff');
-        newEmbed.setTitle(args[0]);
-
-        var description = "";
-
-        if (args[1][0] != '"') description = args[1];
-        else {
-            let j = 1;
-            while (j != args.length && args[j][args[j].length - 1] != '"')
-                j++;
-            
-            args[1] = args[1].substr(1, args[1].length - 1);
-            args[j] = args[j].substr(0, args[j].length - 1);
-            for (var i = 1; i <= j; i++) {
-                if (i > 1) description += " ";
-                description += args[i];
+	async execute(message, args) {
+        const newEmbed = {
+            color: '#0099ff',
+            title: `${args.join(' ')}`,
+            author: {
+                name: message.author.username,
+                iconURL: message.author.displayAvatarURL()
             }
         }
-        newEmbed.setDescription(description);
+        //newEmbed.setAuthor(message.author.username, message.author.displayAvatarURL());
+        await message.channel.send({ embed: newEmbed })
+        .then (embedmsg => {
+            const command = message.client.commands.get('editembed');
+            const msgid = embedmsg.id;
+            command.execute(message,[msgid]);
+        });
 
-        message.channel.send(newEmbed);
     },
 };

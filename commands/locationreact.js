@@ -8,6 +8,22 @@ module.exports = {
     guildOnly: true,
     reactCommand: true,
 	execute(reaction, user) {
+        if (user.id != "775422019822026762") {
+            if (reaction.emoji.toString() == "➕") {
+                console.log(`${user.username} quiere añadir una location.`);
+                addElement();
+                reaction.users.remove(user);
+            }
+            else if (reaction.emoji.toString() == "➖") {
+                console.log(`${user.username} quiere eliminar una location.`);
+                removeElement();
+                reaction.users.remove(user);
+            }
+            else {
+                reaction.remove();
+            }
+        }
+
         function addElement() {
             const channel = reaction.message.channel;
             var sentMessage;
@@ -124,20 +140,6 @@ module.exports = {
                       .catch(console.error);
                 }
             })
-        }
-
-        if (!user.bot) {
-            if (reaction.emoji.toString() == "➕") {
-                addElement();
-                reaction.users.remove(user);
-            }
-            else if (reaction.emoji.toString() == "➖") {
-                removeElement();
-                reaction.users.remove(user);
-            }
-            else {
-                reaction.remove();
-            }
         }
     },
 };
