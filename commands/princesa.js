@@ -274,13 +274,13 @@ module.exports = {
                 if (descartarCartas) {
                     manos[userIndex].slice(1).forEach(emoji => {
                         emojisCartas.push(emoji);
-                        msg.react(emoji);
+                        msg.react(emoji).catch(error => {});
                     });
                 }
                 else {
                     cartasJugables.forEach(emoji => {
                         emojisCartas.push(emoji);
-                        msg.react(emoji);
+                        msg.react(emoji).catch(error => {});
                     });
                 }
 
@@ -324,7 +324,7 @@ module.exports = {
                         manos[userIndex][0].user.send(textoCarta).then(msg2 => {
                             try {
                                 for (let i = 0; i < indexUsersVivos.length; ++i)
-                                    msg2.react(numEmoji(i + 1));
+                                    msg2.react(numEmoji(i + 1)).catch(error => {});
                                 const filter2 = () => true;
                                 const collector2 = msg2.createReactionCollector(filter2);
                                 var selectedUserIndex = 0;
@@ -346,7 +346,7 @@ module.exports = {
 
                                     manos[userIndex][0].user.send(textoCarta2).then(msg3 => {
                                         for (let i = 0; i < cartasPosibles.length; ++i)
-                                            msg3.react(cartasPosibles[i]);
+                                            msg3.react(cartasPosibles[i]).catch(error => {});
                                         const filter3 = () => true;
                                         const collector3 = msg3.createReactionCollector(filter3);
                                         var selectedEmoji = "";
@@ -371,7 +371,7 @@ module.exports = {
                                             textoCarta3 += `Pulsa ✅ para continuar la partida.`;
 
                                             manos[indexUsersVivos[selectedUserIndex]][0].user.send(textoCarta3).then(msg4 => {
-                                                msg4.react(`✅`);
+                                                msg4.react(`✅`).catch(error => {});
                                                 const filter4 = () => true;
                                                 const collector4 = msg4.createReactionCollector(filter4);
                                     
@@ -415,8 +415,7 @@ module.exports = {
 
                         manos[userIndex][0].user.send(textoCarta).then(msg2 => {
                             for (let i = 0; i < indexUsersVivos.length; ++i)
-                                try { msg2.react(numEmoji(i + 1)); }
-                                catch (error) {}
+                                msg2.react(numEmoji(i + 1)).catch(error => {});
                             const filter2 = () => true;
                             const collector2 = msg2.createReactionCollector(filter2);
                             var selectedUserIndex = 0;
@@ -436,7 +435,7 @@ module.exports = {
                                 var textoCarta2 = `${manos[indexUsersVivos[selectedUserIndex]][0].user} tiene esta carta: ${manos[indexUsersVivos[selectedUserIndex]].slice(1).join(' ')}.\nPulsa ✅ para acabar tu turno.`;
 
                                 manos[userIndex][0].user.send(textoCarta2).then(msg3 => {
-                                    msg3.react('✅');
+                                    msg3.react('✅').catch(error => {});
                                     const filter3 = () => true;
                                     const collector3 = msg3.createReactionCollector(filter3);
                                     var selectedEmoji = "";
@@ -472,8 +471,7 @@ module.exports = {
 
                         manos[userIndex][0].user.send(textoCarta).then(msg2 => {
                             for (let i = 0; i < indexUsersVivos.length; ++i)
-                                try { msg2.react(numEmoji(i + 1)); }
-                                catch(error) {}
+                                msg2.react(numEmoji(i + 1)).catch(error => {});
                             const filter2 = () => true;
                             const collector2 = msg2.createReactionCollector(filter2);
                             var selectedUserIndex = 0;
@@ -499,7 +497,7 @@ module.exports = {
                                 textoCarta2 += `Pulsa ✅ para acabar tu turno.`;
 
                                 manos[userIndex][0].user.send(textoCarta2).then(msg3 => {
-                                    msg3.react('✅');
+                                    msg3.react('✅').catch(error => {});
                                     const filter3 = () => true;
                                     const collector3 = msg3.createReactionCollector(filter3);
                                     var selectedEmoji = "";
@@ -550,8 +548,7 @@ module.exports = {
                         }
                         manos[userIndex][0].user.send(textoCarta).then(msg2 => {
                             for (let i = 0; i < indexUsersVivos.length; ++i)
-                                try { msg2.react(numEmoji(i + 1)); }
-                                catch(error) {}
+                                msg2.react(numEmoji(i + 1)).catch(error => {});
                             const filter2 = () => true;
                             const collector2 = msg2.createReactionCollector(filter2);
                             var selectedUserIndex = 0;
@@ -588,8 +585,7 @@ module.exports = {
                         }
                         manos[userIndex][0].user.send(textoCarta).then(msg2 => {
                             for (let i = 0; i < indexUsersVivos.length; ++i)
-                                try { msg2.react(numEmoji(i + 1)); }
-                                catch(error) {}
+                                msg2.react(numEmoji(i + 1)).catch(error => {});
                             const filter2 = () => true;
                             const collector2 = msg2.createReactionCollector(filter2);
                             var selectedUserIndex = 0;
