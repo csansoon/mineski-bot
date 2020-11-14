@@ -303,7 +303,7 @@ module.exports = {
                     manos[userIndex].splice(manos[userIndex].slice(1).indexOf(cartaJugada) + 1, 1);
 
                     if (descartarCartas) {
-                        actualizarHistorial(`${manos[userIndex][0].user} no puede jugar y descarta ${cartaJugada}.`);
+                        actualizarHistorial(`${manos[userIndex][0].user} no puede jugar y descarta ${cartaJugada}.\n`);
                         finTurno = true;
                     }
 
@@ -459,7 +459,7 @@ module.exports = {
                     }
 
                     else if (cartaJugada == carta3) {
-                        actualizarHistorial(`${manos[userIndex][0].user} lanza ${cartaJugada} para retar en duelo a muerte a\n`);
+                        actualizarHistorial(`${manos[userIndex][0].user} lanza ${cartaJugada} para retar en duelo a muerte a `);
                         var textoCarta = `Elije a un jugador para retar a muerte:\n`;
                         var indexUsersVivos = [];
                         for (let i = 0; i < manos.length; ++i) {
