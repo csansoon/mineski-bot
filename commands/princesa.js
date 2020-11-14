@@ -574,7 +574,7 @@ module.exports = {
                     }
 
                     else if (cartaJugada == carta6) {
-                        actualizarHistorial(`${manos[userIndex][0].user} lanza ${cartaJugada} hacia \n`);
+                        actualizarHistorial(`${manos[userIndex][0].user} lanza ${cartaJugada} hacia `);
                         var textoCarta = `Elije a un jugador para intercambiar cartas:\n`;
                         var indexUsersVivos = [];
                         for (let i = 0; i < manos.length; ++i) {
