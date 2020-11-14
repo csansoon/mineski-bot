@@ -309,7 +309,7 @@ module.exports = {
                             }
                         }
                         for (let i = 0; i < indexUsersVivos.length; ++i) {
-                            textoCarta += `${numEmoji(i+1)}: ${manos[indexUsersVivos][0].user}\n`;
+                            textoCarta += `${numEmoji(i+1)}: ${manos[indexUsersVivos[i]][0].user}\n`;
                         }
 
                         manos[userIndex][0].user.send(textoCarta).then(msg2 => {
@@ -378,7 +378,7 @@ module.exports = {
                             if (manos[i][0].vivo && !manos[i][0].escudo && manos[i][0].user != manos[userIndex][0].user) indexUsersVivos.push(i);
                         }
                         for (let i = 0; i < indexUsersVivos.length; ++i) {
-                            textoCarta += `${numEmoji(i+1)}: ${manos[indexUsersVivos][0].user}\n`;
+                            textoCarta += `${numEmoji(i+1)}: ${manos[indexUsersVivos[i]][0].user}\n`;
                         }
 
                         manos[userIndex][0].user.send(textoCarta).then(msg2 => {
@@ -435,7 +435,7 @@ module.exports = {
                             if (manos[i][0].vivo && !manos[i][0].escudo && manos[i][0].user != manos[userIndex][0].user) indexUsersVivos.push(i);
                         }
                         for (let i = 0; i < indexUsersVivos.length; ++i) {
-                            textoCarta += `${numEmoji(i+1)}: ${manos[indexUsersVivos][0].user}\n`;
+                            textoCarta += `${numEmoji(i+1)}: ${manos[indexUsersVivos[i]][0].user}\n`;
                         }
 
                         manos[userIndex][0].user.send(textoCarta).then(msg2 => {
