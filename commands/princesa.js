@@ -33,6 +33,7 @@ module.exports = {
         const carta7 = "7️⃣";
         const carta8 = "👑";
 
+        
         var cartas = [
             carta1, carta1, carta1, carta1, carta1,
             carta2, carta2,
@@ -181,7 +182,15 @@ module.exports = {
                 }
                 mano[0].message.edit({ embed: embedIndividual });
             });
-            mensajePublico.edit({ embed: embedPartida });
+            var embedPublico = copiarEmbed();
+            embedPublico.fields = [
+                {
+                    name: "Cartas restantes",
+                    value: cartas.length,
+                    inline: true
+                }
+            ]; 
+            mensajePublico.edit({ embed: embedPublico });
         }
 
         var partidaActiva = true;
@@ -337,7 +346,7 @@ module.exports = {
 
                                     manos[userIndex][0].user.send(textoCarta2).then(msg3 => {
                                         for (let i = 0; i < cartasPosibles.length; ++i)
-                                            if (msg3) msg3.react(cartasPosibles[i]);
+                                            msg3.react(cartasPosibles[i]);
                                         const filter3 = () => true;
                                         const collector3 = msg3.createReactionCollector(filter3);
                                         var selectedEmoji = "";
@@ -353,15 +362,38 @@ module.exports = {
                             
                                         collector3.on('end', collected => {
                                             msg3.delete();
-                                            actualizarHistorial(`${selectedEmoji}. `);
-                                            if (manos[indexUsersVivos[selectedUserIndex]].slice(1).includes(selectedEmoji)) {
-                                                actualizarHistorial(`(✅)\n`);
-                                                matar(indexUsersVivos[selectedUserIndex]);
-                                            }
-                                            else {
-                                                actualizarHistorial(`(❌)\n`);
-                                            }
-                                            finTurno = true;
+                                            actualizarHistorial(`${selectedEmoji}.`);
+                                            var textoCarta3 = `${manos[userIndex][0].user} te acusa de tener: ${selectedEmoji}\n`;
+                                            let hasPerdido = manos[indexUsersVivos[selectedUserIndex]].slice(1).includes(selectedEmoji);
+
+                                            if (hasPerdido) textoCarta3 += `Ha acertado, has muerto. 💀\n`;
+                                            else textoCarta3 += `Ha fallado, no pasa nada. 🤷‍♂️\n`;
+                                            textoCarta3 += `Pulsa ✅ para continuar la partida.`;
+
+                                            manos[indexUsersVivos[selectedUserIndex]][0].user.send(textoCarta3).then(msg4 => {
+                                                msg4.react(`✅`);
+                                                const filter4 = () => true;
+                                                const collector4 = msg4.createReactionCollector(filter4);
+                                    
+                                                collector4.on('collect', (reaction4, user4) => {
+                                                    if (user4 != manos[indexUsersVivos[selectedUserIndex]][0].user) return;
+                                                    if (reaction4.emoji.toString() != '✅') return;
+
+                                                    collector4.stop();
+                                                });
+                                    
+                                                collector4.on('end', collected => {
+                                                    msg4.delete();
+                                                    if (hasPerdido) {
+                                                        actualizarHistorial(`(✅)\n`);
+                                                        matar(indexUsersVivos[selectedUserIndex]);
+                                                    }
+                                                    else {
+                                                        actualizarHistorial(`(❌)\n`);
+                                                    }
+                                                    finTurno = true;
+                                                });
+                                            });
                                         });
                                     });
                                 });
@@ -610,8 +642,13 @@ module.exports = {
             for (let i = 0; i < manos.length; ++i) {
                 if (manos[i][0].vivo) {
                     indexUsersVivos.push(i);
-                    if (valorCarta(manos[i][manos[i].length]) == maxValue) ganadores.push(i);
-                    else if (valorCarta(manos[i][manos[i].length]) > maxValue) ganadores = [i];
+                    if (valorCarta(manos[i][manos[i].length-1]) == maxValue) {
+                        ganadores.push(i);
+                    }
+                    else if (valorCarta(manos[i][manos[i].length-1]) > maxValue) {
+                        maxValue = valorCarta(manos[i][manos[i].length-1]);
+                        ganadores = [i];
+                    }
                 }
             }
 
@@ -620,16 +657,19 @@ module.exports = {
             for (let i = 0; i < indexUsersVivos.length; ++i) {
                 let nombreUser = `${manos[indexUsersVivos[i]][0].user.username}`;
                 if (ganadores.includes(indexUsersVivos[i])) nombreUser = `👑${manos[indexUsersVivos[i]][0].user.username}👑`;
+                let valueUser = manos[indexUsersVivos[i]][manos[indexUsersVivos[i]].length-1];
                 finishFields.push({
                     name: nombreUser,
-                    value: manos[indexUsersVivos[i]][manos[indexUsersVivos[i]].length-1],
+                    value: valueUser,
                     inline: true
                 });
             }
             if (indexUsersVivos.length > 1 && cartas.length) {
+                let nombreCarta = `🎴 Carta restante 🎴`;
+                let valueCarta = cartas[cartas.length-1];
                 finishFields.push({
-                    name: "Carta restante",
-                    value: cartas[cartas.length-1],
+                    name: nombreCarta,
+                    value: valueCarta,
                     inline: true
                 });
             }
