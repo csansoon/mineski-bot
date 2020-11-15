@@ -143,20 +143,24 @@ module.exports = {
         }
 
         function enviarEmbed() {
+            let jugadoresVivos = "";
+            for (let i = 0; i < manos.length; ++i) {
+                if (manos[i][0].vivo) {
+                    if (manos[i][0].escudo) {
+                        jugadoresVivos += `${manos[i][0].user.username}${carta4}`;
+                    }
+                    else {
+                        jugadoresVivos += `${manos[i][0].user.username}`;
+                    }
+                    if (turno == i) {
+                        jugadoresVivos += " ⬅";
+                    }
+                    jugadoresVivos += "\n";
+                }
+            }
             manos.map(mano => {
                 let embedIndividual = copiarEmbed();
 
-                let jugadoresVivos = "";
-                for (let i = 0; i < manos.length) {
-                    if (manos[i][0].vivo) {
-                        if (manos[i][0].escudo) {
-                            jugadoresVivos += `${carta4}${manos[i][0].user.username}${carta4}\n`;
-                        }
-                        else {
-                            jugadoresVivos += `${manos[i][0].user.username}\n}`;
-                        }
-                    }
-                }
 
 
                 if (!partidaActiva) {
