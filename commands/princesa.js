@@ -146,6 +146,19 @@ module.exports = {
             manos.map(mano => {
                 let embedIndividual = copiarEmbed();
 
+                let jugadoresVivos = "";
+                for (let i = 0; i < manos.length) {
+                    if (manos[i][0].vivo) {
+                        if (manos[i][0].escudo) {
+                            jugadoresVivos += `${carta4}${manos[i][0].user.username}${carta4}\n`;
+                        }
+                        else {
+                            jugadoresVivos += `${manos[i][0].user.username}\n}`;
+                        }
+                    }
+                }
+
+
                 if (!partidaActiva) {
                     embedIndividual.color = "#f5d442";
                 }
@@ -156,6 +169,11 @@ module.exports = {
                     {
                         name: "Cartas restantes",
                         value: cartas.length,
+                        inline: true
+                    },
+                    {
+                        name: "Jugadores restantes",
+                        value: jugadoresVivos,
                         inline: true
                     }
                 ]; 
@@ -170,6 +188,11 @@ module.exports = {
                         {
                             name: "Cartas restantes",
                             value: cartas.length,
+                            inline: true
+                        },
+                        {
+                            name: "Jugadores restantes",
+                            value: jugadoresVivos,
                             inline: true
                         }
                     ]; 
@@ -187,6 +210,11 @@ module.exports = {
                 {
                     name: "Cartas restantes",
                     value: cartas.length,
+                    inline: true
+                },
+                {
+                    name: "Jugadores restantes",
+                    value: jugadoresVivos,
                     inline: true
                 }
             ]; 
