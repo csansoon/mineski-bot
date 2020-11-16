@@ -1,4 +1,5 @@
 const { prefix } = require('../config.json');
+const Discord = require('discord.js');
 
 module.exports = {
 	name: 'help',
@@ -13,15 +14,16 @@ module.exports = {
         const { commands } = message.client;
 
         var textoMensaje = "";
-        var embed;
+        var embed = new Discord.MessageEmbed();
 
         if (!args.length) {
             textoMensaje = "Hey, aquí tienes una lista con todos mis comandos:"
             embed.title = "Comandos:"
             embed.description = `Lista con todos mis comandos disponibles.`;
-            embed.description += `\n*El icono ☁ marca los comandos que sólo puedes usar en un servidor y no funcionan por DM*`;
-            embed.description += `\n*El icono ⭐ marca los comandos que sólo pueden usar los administradores del servidor*`;
-            embed.description += `\nSi necesitas más información sobre un comando en específico, escribe "\`\`\`${prefix}${this.name} <COMANDO>\`\`\`" y te diré qué hace y cómo funciona :D\n`;
+            //embed.description += `\n*El icono ☁ marca los comandos que sólo puedes usar en un servidor y no funcionan por DM*`;
+            //embed.description += `\n*El icono ⭐ marca los comandos que sólo pueden usar los administradores del servidor*`;
+            embed.description += `\nSi necesitas más información sobre un comando en específico,\nescribe "\`${prefix}${this.name} <COMANDO>\`" y te diré qué hace y cómo funciona :D\n`;
+            embed.description += "\n**TODOS LOS COMANDOS:**\n";
 
             embed.color = "#0599f5";
 
@@ -34,14 +36,14 @@ module.exports = {
                 let icons = [];
                 if (command.guildOnly) icons.push('☁');
                 if (command.admin) icons.push('⭐');
-                if (icons.length) nombre += `[${icons.join('')}]`
+                //if (icons.length) nombre += `[${icons.join('')}]`
                 embed.fields.push({
                     name: nombre,
-                    value: command.resumen,
+                    value: resumen,
                     inline: true
                 })
             });
-            embed.footer = `Escribe \`${prefix}${this.name} <COMANDO>\` para obtener información sobre un comando en específico.`;
+            embed.footer = {text: `Escribe "${prefix}${this.name} <comando>\" para obtener más información sobre un comando en específico.`};
         }
 
         else if (args.length) {
