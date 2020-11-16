@@ -2,7 +2,7 @@ module.exports = {
     name: 'avatar',
     aliases: ['icon', 'icono', 'picture'],
     resumen: 'Muestra un avatar.',
-    description: 'Muestra el avatar de un usuario!',
+    description: 'Muestra el avatar de un usuario\n(Básicamente es un comando de prueba para aprender a programar el bot xd)',
     needs_args: true,
     min_args: 1,
     usage: '<users>',
