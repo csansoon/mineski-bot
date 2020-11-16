@@ -2,6 +2,7 @@ module.exports = {
 	name: 'locate',
     aliases: ['ALIAS1', 'ALIAS2'],
     icon: '🧭',
+    resumen: 'Esto lo voy a quitar',
     description: 'Añade un nuevo sitio en el mapa.',
     needs_args: false,
     usage: '<titulo> <x> <y>(opcional) <z>',

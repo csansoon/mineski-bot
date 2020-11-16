@@ -2,6 +2,7 @@ module.exports = {
 	name: 'clean',
     aliases: ['clear'],
     icon: '🧹',
+    resumen: 'Limpia el chat',
     description: 'Elimina mensajes del chat que no estén pinneados.',
     needs_args: true,
     min_args: 1,

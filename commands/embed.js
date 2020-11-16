@@ -4,7 +4,8 @@ const Discord = require('discord.js');
 module.exports = {
 	name: 'embed',
     icon: ':speech_balloon:',
-    description: 'Crea un nuevo embed',
+    resumen: 'Crea un embed.',
+    description: 'Crea un nuevo embed y abre un editor más cómodo e interactivo.',
     needs_args: true,
     min_args: 1,
     usage: '<título>',

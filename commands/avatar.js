@@ -1,6 +1,7 @@
 module.exports = {
     name: 'avatar',
     aliases: ['icon', 'icono', 'picture'],
+    resumen: 'Muestra un avatar.',
     description: 'Muestra el avatar de un usuario!',
     needs_args: true,
     min_args: 1,

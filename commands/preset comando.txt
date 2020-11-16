@@ -2,6 +2,7 @@ module.exports = {
 	name: 'NOMBRE', //Debe ser todo minusculas!
     aliases: ['ALIAS1', 'ALIAS2'],
     icon: 'EMOJI',
+    resumen: 'RESUMEN CORTO',
     description: 'DESCRIPCIÓN',
     needs_args: REQUIERE_ARGUMENTOS?,
     min_args: NUM_MIN,

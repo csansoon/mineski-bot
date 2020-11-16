@@ -2,6 +2,7 @@ module.exports = {
 	name: 'editembed', //Debe ser todo minusculas!
     aliases: ['editarembed', 'embededit'],
     icon: '✏',
+    resumen: 'Edita un embed.',
     description: 'Abre un editor de embeds interactivo',
     needs_args: true,
     min_args: 1,

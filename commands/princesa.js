@@ -4,6 +4,7 @@ module.exports = {
 	name: 'princesa',
     aliases: ['jugarprincesa', 'playprincesa'],
     icon: '♠',
+    resumen: 'Juega a la princesa',
     description: 'Empezar un juego de La Princesa con los jugadores establecidos.',
     needs_args: true,
     min_args: 2,

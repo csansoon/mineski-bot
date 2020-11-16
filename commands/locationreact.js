@@ -2,6 +2,7 @@ const { Discord } = require("discord.js");
 
 module.exports = {
 	name: 'locationreact',
+    resumen: 'Esto lo voy a quitar',
     description: 'Nueva reacción en el mensaje de localizaciónes',
     needs_args: false,
     admin: false,
