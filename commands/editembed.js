@@ -48,12 +48,12 @@ module.exports = {
 
                 message.delete();
 
-                const filter = () => true;
-                const collector = editmsg.createReactionCollector(filter);
+                const filter1 = () => true;
+                const collector1 = editmsg.createReactionCollector(filter1);
 
                 var sentMessage;
 
-                collector.on('collect', (reaction, user) => {
+                collector1.on('collect', (reaction, user) => {
                     if (user.id == editmsg.author.id) return;
 
 
@@ -348,18 +348,18 @@ module.exports = {
 
 
                     else if (reaction.emoji.toString() == "🗑") {
+                        collector1.stop();
                         embedmsg.delete();
-                        collector.stop();
                     }
 
 
-                    else if (reaction.emoji.toString() == "✅") collector.stop();
+                    else if (reaction.emoji.toString() == "✅") collector1.stop();
 
                     reaction.users.remove(user);
 
                 });
 
-                collector.on('end', collected => {
+                collector1.on('end', collected => {
                     editmsg.delete();
                 });
 

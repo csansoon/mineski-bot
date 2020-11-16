@@ -9,8 +9,6 @@ module.exports = {
     usage: '<ARGUMENTOS>',
     admin: REQUIERE-SER-ADMIN?,
     guildOnly: SOLO_FUNCIONA_EN_SERVERS?,
-    reactCommand: FUNCIONA_CON_REACTS?,
-    removeMessage: ELMINAR_MENSAJE_DESPUES_DE_EJECUTAR?,
 	execute(message, args) {
         ...
     },
